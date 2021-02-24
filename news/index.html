@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .news-list {
+            /* display: flex;
+            flex-wrap: wrap; */
+        }
+        .news-list > .item {
+            flex: 0 0 calc(25% - 5px);
+            list-style: none;
+        }
+        .news-list > .item > .title {
+            font-weight: bold;
+        }
+        .news-list > .item > .link > img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>News</h1>
+    <ul id="newsArea" class="news-list">
+    </ul>
+    <button id="order">ORDER</button><!-- /#order -->
+    <button id="reorder">REVERSE</button><!-- /#order -->
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../assets/js/news_axios.js"></script>
+</body>
+</html>
