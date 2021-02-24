@@ -1,6 +1,8 @@
 
 var html = '';
 var NEWSARRAY = [];
+var ORDERED_NEWSARRAY = [];
+var RE_ORDERED_NEWSARRAY = [];
 
 function compareDateOrder(a, b) {
     var r = 0;
@@ -27,6 +29,14 @@ getJSON = function () {
             NEWSARRAY = data;
             fillNews(data);
         })
+    axios.get('https://news-matsu-2021-02.microcms.io/api/v1/news?orders=publishedAt', { headers: { 'X-API-KEY': 'b628bb04-48ce-4e28-aa89-646073b40368' } })
+        .then(function (response) {
+            ORDERED_NEWSARRAY = response.data.contents;;
+        })
+    axios.get('https://news-matsu-2021-02.microcms.io/api/v1/news?orders=-publishedAt', { headers: { 'X-API-KEY': 'b628bb04-48ce-4e28-aa89-646073b40368' } })
+        .then(function (response) {
+            RE_ORDERED_NEWSARRAY = response.data.contents;;
+        })
 }
 getJSON();
 
@@ -51,11 +61,14 @@ fillNewsByDate = function (e, order) {
     fillNews(data);
 }
 
+
 eventFunctions = function () {
     var buttonOrder = document.getElementById('order');
     var buttonreOrder = document.getElementById('reorder');
-    buttonOrder.addEventListener('click', function (e) { fillNewsByDate(e, compareDateOrder) }, false);
-    buttonreOrder.addEventListener('click', function (e) { fillNewsByDate(e, compareDateReOrder) }, false);
+    // buttonOrder.addEventListener('click', function (e) { fillNewsByDate(e, compareDateOrder) }, false);
+    // buttonreOrder.addEventListener('click', function (e) { fillNewsByDate(e, compareDateReOrder) }, false);
+    buttonOrder.addEventListener('click', function (e) { fillNews(ORDERED_NEWSARRAY) }, false);
+    buttonreOrder.addEventListener('click', function (e) { fillNews(RE_ORDERED_NEWSARRAY) }, false);
 }
 
 document.addEventListener('DOMContentLoaded', eventFunctions(), false);
